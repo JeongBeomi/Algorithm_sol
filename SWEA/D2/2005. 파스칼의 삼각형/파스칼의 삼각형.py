@@ -6,6 +6,7 @@ def pascal(n):
         add_line.append(1)
         memo.append(add_line)
     return memo[0:n]
+
 memo = [[1]]
 t = int(input())
 for tc in range(t):
