@@ -18,6 +18,5 @@ def solution(dartResult):
                 num_list[-1] *= 2
         elif char == "#":
             num_list[-1] *= -1
-        print(num_list)
     answer = sum(num_list)
     return answer
