@@ -1,42 +1,51 @@
-my_map = [list(map(int, input().split())) for _ in range(5)]
-sol_map = []
-for _ in range(5):
-    for i in map(int, input().split()):
-        sol_map.append(i)
-
-for idx in range(25):
-    bg_cnt = 0
-    host_num = sol_map[idx]
-
-    for j in range(5):
-        breaker = False
-        for k in range(5):
-            if my_map[j][k] == host_num:
-                my_map[j][k] = 0
+def bingo(num):
+    cnt = 0
+    breaker = False
+    # 사회자가 부른 번호 빙고판에서 찾아서 0처리
+    for i in range(5):
+        for j in range(5):
+            if bingo_map[i][j] == num:
+                bingo_map[i][j] = 0
                 breaker = True
                 break
         if breaker:
             break
+    sum1, sum2 = 0, 0
+    # 빙고 탐색
+    re_map = list(zip(*bingo_map))      # 세로 탐색을 위한 뒤집기
 
-    cross_sum = 0
-    reverse_cross_sum = 0
-    for cross_idx in range(5):
-        cross_sum += my_map[cross_idx][cross_idx]
-        reverse_cross_sum += my_map[cross_idx][4 - cross_idx]
-    if cross_sum == 0:
-        bg_cnt += 1
-    if reverse_cross_sum == 0:
-        bg_cnt += 1
+    for i in range(5):
+        if sum(bingo_map[i]) == 0:      # 가로 탐색
+            cnt += 1
+        if sum(re_map[i]) == 0:         # 세로 탐색
+            cnt += 1
 
-    for check_line in my_map:
-        if sum(check_line) == 0:
-            bg_cnt += 1
+        for j in range(5):              # 대각선 탐색
+            if i == j:
+                sum1 += bingo_map[i][j]
+            if i + j == 4:
+                sum2 += bingo_map[i][j]
+    if sum1 == 0:
+        cnt += 1
+    if sum2 == 0:
+        cnt += 1
 
-    new_my_map = list(map(list, zip(*my_map)))
-    for check_line in new_my_map:
-        if sum(check_line) == 0:
-            bg_cnt += 1
+    if cnt >= 3:
+        return True
+    else:
+        return False
 
-    if bg_cnt >= 3:
-        print(idx + 1)
+
+bingo_map = [list(map(int, input().split())) for _ in range(5)]
+call_num = []
+
+# 사회자가 부르는 번호는 1차원 리스트로 저장
+for _ in range(5):
+    for num in map(int, input().split()):
+        call_num.append(num)
+
+cnt = 0
+for i in range(25):
+    if bingo(call_num[i]):
+        print(i + 1)
         break
