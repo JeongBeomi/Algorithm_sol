@@ -11,17 +11,14 @@ def sudoku(sdk_map):
 
     # 가로 세로 확인
     for i in range(9):
-        set_row = set(sdk_map[i])
-
-        set_col = set()
+        set_row = set(sdk_map[i])   # 가로
+        set_col = set()             # 세로
         for j in range(9):
             set_col.add(sdk_map[j][i])
         if len(set_col) != 9 or len(set_row) != 9:
             return 0
 
     return 1
-
-
 
 
 t = int(input())
