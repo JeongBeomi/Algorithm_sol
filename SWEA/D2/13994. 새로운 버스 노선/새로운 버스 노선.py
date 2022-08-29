@@ -1,27 +1,21 @@
 t = int(input())
 for tc in range(t):
-    # 멈추는 정류장 카운트 리스트
-    count = [0] * 1000
-    for _ in range(int(input())):
-        line, a, b = map(int, input().split())
-
-        # 일반버스일 때 멈추는 정류장에 1증가
-        if line == 1:
-            for i in range(a, b+1):
-                count[i-1] += 1
-        # 급행버스일 때 멈추는 정류장에 1증가
-        elif line == 2:
-            for j in range(a, b+1, 2):
-                count[j-1] += 1
-        # 광역버스일 때 멈추는 정류장에 1증가
+    n = int(input())
+    stop_cnt = [0] * 1001
+    for _ in range(n):
+        bus, a, b = map(int, input().split())
+        stop_cnt[a] += 1
+        stop_cnt[b] += 1
+        if bus == 1:    # 일반
+            for i in range(a + 1, b):
+                stop_cnt[i] += 1
+        elif bus == 2:  # 급행
+            for i in range(a + 2, b, 2):
+                stop_cnt[i] += 1
         else:
-            if a % 2 == 0:
-                for k in range(a, b+1):
-                    if k % 4 == 0:
-                        count[k-1] += 1
-            else:
-                for k in range(a, b+1):
-                    if k % 3 == 0 and k % 10 != 0:
-                        count[k-1] += 1
-
-    print(f"#{tc+1} {max(count)}")
+            for i in range(a + 1, b):
+                if a % 2 == 0 and i % 4 == 0:
+                    stop_cnt[i] += 1
+                elif a % 2 == 1 and i % 3 == 0 and i % 10 != 0:
+                    stop_cnt[i] += 1
+    print(f"#{tc + 1} {max(stop_cnt)}")
