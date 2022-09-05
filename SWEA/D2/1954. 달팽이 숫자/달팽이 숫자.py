@@ -10,13 +10,11 @@ for tc in range(t):
     input_num = 1
     x, y = 0, 0
     now_dir = 0
-    while True:
+    while input_num <= n**2:
         # 0, 0 시작점부터 1부터 숫자 대입
         numbers_list[x][y] = input_num
         input_num += 1
 
-        if input_num > n**2:
-            break
         # 현재 진행 방향으로 계속 이동이 가능한지 확인, 불가능하면 다음 진행방향으로 전환
         nx = x + dx[now_dir]
         ny = y + dy[now_dir]
@@ -24,7 +22,7 @@ for tc in range(t):
             pass
         else:
             # 진행 방향 변경
-            now_dir = (now_dir+1) % 4
+            now_dir = (now_dir + 1) % 4
 
         # 진행가능한 방향으로 좌표 이동
         x = x + dx[now_dir]
