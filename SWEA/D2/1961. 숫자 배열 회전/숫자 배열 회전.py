@@ -6,12 +6,12 @@ def turn(list_a):
 
 
 t = int(input())
-for tc in range(t):
+for tc in range(1, t + 1):
     n = int(input())
     list_a = [list(input().split()) for _ in range(n)]
     arr1 = turn(list_a)
     arr2 = turn(arr1)
     arr3 = turn(arr2)
-    print(f"#{tc + 1}")
+    print(f"#{tc}")
     for i in range(n):
         print(arr1[i], arr2[i], arr3[i])
