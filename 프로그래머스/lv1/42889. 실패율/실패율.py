@@ -10,12 +10,15 @@ def solution(N, stages):
                 user += 1
                 if i == stage:
                     count += 1
-            if user == 0:
-                probability = 0
-            else:
-                probability = count / user
+        if user == 0:
+            probability = 0
+        else:
+            probability = count / user
         stage_probability.append((probability, i))
 
     for m in sorted(stage_probability, key=lambda x: -x[0]):
         answer.append(m[1])
     return answer
+
+
+print(solution(4, [4, 4, 4, 4, 4]))
