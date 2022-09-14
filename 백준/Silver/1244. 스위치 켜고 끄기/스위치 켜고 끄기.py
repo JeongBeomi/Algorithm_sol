@@ -21,7 +21,5 @@ for _ in range(n):
             cnt += 1
 
 
-for idx in range(1, length + 1):
-    print(sw_state[idx - 1], end=" ")
-    if idx % 20 == 0:
-        print()
+for idx in range(0, length, 10):
+    print(*sw_state[idx : idx + 10])
