@@ -27,7 +27,7 @@ def reverse_d(r, c, p):
 dr = [-1, 1, 0, 0, -1, -1, 1, 1]
 dc = [0, 0, -1, 1, -1, 1, -1, 1]
 # 다른색 돌 찾기  1 -> 2/ 2 -> 1
-r_dol = [0, 2, 1, 0]
+r_dol = [0, 2, 1]
 
 t = int(input())
 for tc in range(t):
