@@ -24,5 +24,5 @@ for _ in range(10):
                     temp[r][c] = 0
                     cnt += 1
         cnt_list.append(cnt)
-    result = cnt_list[::-1].index(min(cnt_list[::-1]))
+    result = cnt_list[::-1].index(min(cnt_list))
     print(f"#{n} {start[::-1][result]}")
