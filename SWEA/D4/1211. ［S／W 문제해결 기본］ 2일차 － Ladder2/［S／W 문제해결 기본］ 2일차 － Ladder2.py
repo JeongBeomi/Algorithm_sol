@@ -13,7 +13,6 @@ for _ in range(10):
         temp = copy.deepcopy(matrix)
         cnt = 0
         r, c = 0, s
-        # temp[r][c] = 0
         while r < 99:
             temp[r][c] = 0
             cnt += 1
@@ -22,8 +21,6 @@ for _ in range(10):
                 if 0 <= nr < 100 and 0 <= nc < 100 and temp[nr][nc] == 1:
                     r, c = nr, nc
                     break
-                    # temp[r][c] = 0
-                    # cnt += 1
         cnt_list.append(cnt)
     result = cnt_list[::-1].index(min(cnt_list))
     print(f"#{n} {start[::-1][result]}")
