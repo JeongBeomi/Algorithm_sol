@@ -18,10 +18,7 @@ for w, v1, v2 in edge:
     root1 = find_set(v1)
     root2 = find_set(v2)
     if root1 != root2:
-        if root1 <= root2:
-            parent[root2] = root1
-        else:
-            parent[root1] = root2
+        parent[root2] = root1
         cnt += 1
         cost += w
     if cnt >= v - 1:
