@@ -1,12 +1,11 @@
 from heapq import heappush, heappop
 
-
 def prim(s):
     visited = [False] * (n + 1)
     heap = [(0, s)]
     result = []
 
-    while heap:
+    while len(result) < n:
         min_w, min_n = heappop(heap)
         if visited[min_n]:
             continue
