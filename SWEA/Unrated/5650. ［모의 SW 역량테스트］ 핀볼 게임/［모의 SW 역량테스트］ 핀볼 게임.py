@@ -9,6 +9,7 @@ def pinball(r, c):
                 d = blocks[5][d]
                 sr, sc = nr, nc
                 cnt += 1
+                continue
 
             elif matrix[nr][nc] in {0, -1}:
                 sr, sc = nr, nc
@@ -22,11 +23,10 @@ def pinball(r, c):
                 d = blocks[matrix[nr][nc]][d]
                 cnt += 1
                 sr, sc = nr, nc
-            if 0 <= nr < n and 0 <= nc < n:
-                if matrix[sr][sc] == -1 or (sr == r and sc == c):
-                    if cnt > max_v:
-                        max_v = cnt
-                    break
+            if matrix[sr][sc] == -1 or (sr == r and sc == c):
+                if cnt > max_v:
+                    max_v = cnt
+                break
 
 
 # 상하좌우 0 1 2 3
@@ -45,7 +45,7 @@ for tc in range(t):
         for j in range(n):
             if matrix[i][j] in hole:
                 blocks[matrix[i][j]].append((i, j))
-                
+
     for i in range(n):
         for j in range(n):
             if matrix[i][j] == 0:
