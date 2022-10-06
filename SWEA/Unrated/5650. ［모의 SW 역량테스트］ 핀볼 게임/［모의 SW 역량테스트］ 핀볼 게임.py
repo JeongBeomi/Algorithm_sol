@@ -13,7 +13,7 @@ def pinball(r, c):
             elif matrix[nr][nc] in {0, -1}:
                 sr, sc = nr, nc
 
-            elif matrix[nr][nc] in hole:
+            elif 6 <= matrix[nr][nc] <= 10:
                 for pos in blocks[matrix[nr][nc]]:
                     if (nr, nc) != pos:
                         sr, sc = pos
@@ -38,12 +38,11 @@ for tc in range(t):
     n = int(input())
     matrix = [list(map(int, input().split())) for _ in range(n)]
     blocks = [[0], [1, 3, 0, 2], [3, 0, 1, 2], [2, 0, 3, 1], [1, 2, 3, 0], [1, 0, 3, 2], [], [], [], [], []]
-    hole = {6, 7, 8, 9, 10}
     max_v = 0
     # 웜홀쌍 찾기
     for i in range(n):
         for j in range(n):
-            if matrix[i][j] in hole:
+            if 6 <= matrix[i][j] <= 10:
                 blocks[matrix[i][j]].append((i, j))
 
     for i in range(n):
