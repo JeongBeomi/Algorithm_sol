@@ -6,10 +6,9 @@ def pinball(r, c):
         while True:
             nr, nc = sr + dr[d], sc + dc[d]
             if not 0 <= nr < n or not 0 <= nc < n:
-                d = blocks[5][d]
-                sr, sc = nr, nc
+                sr, sc = r, c
+                cnt *= 2
                 cnt += 1
-                continue
 
             elif matrix[nr][nc] in {0, -1}:
                 sr, sc = nr, nc
@@ -23,6 +22,7 @@ def pinball(r, c):
                 d = blocks[matrix[nr][nc]][d]
                 cnt += 1
                 sr, sc = nr, nc
+
             if matrix[sr][sc] == -1 or (sr == r and sc == c):
                 if cnt > max_v:
                     max_v = cnt
@@ -50,4 +50,5 @@ for tc in range(t):
         for j in range(n):
             if matrix[i][j] == 0:
                 pinball(i, j)
+
     print(f"#{tc + 1} {max_v}")
