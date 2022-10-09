@@ -8,11 +8,15 @@ for tc in range(t):
             num = nums[i] * nums[k]
             if max_v >= num:
                 continue
-            danjo = list(map(int, str(num)))
+            # danjo = list(map(int, str(num)))
+            danjo = []
+            while num:
+                danjo.append(num % 10)
+                num = num // 10
             for j in range(len(danjo) - 1):
-                if danjo[j] > danjo[j + 1]:
+                if danjo[j] < danjo[j + 1]:
                     break
             else:
-                max_v = num
+                max_v = nums[i] * nums[k]
 
     print(f"#{tc + 1} {max_v}")
