@@ -4,14 +4,15 @@ from copy import deepcopy
 
 def bfs(ball_drop):
     global block_cnt
-    co_matrix = deepcopy(matrix)
+    # co_matrix = deepcopy(matrix)
+    co_matrix = [line[:] for line in matrix]
     for col in ball_drop:
         row = 0
         for i in range(h):  # 구슬이 처음만나는 벽돌 찾기.
             if co_matrix[i][col] != 0:
                 row = i
                 break
-        else:   # 처음마는 벽돌을 찾지못하면 다음 공으로 넘어가기.
+        else:   # 처음만나는 벽돌을 찾지못하면 다음 공으로 넘어가기.
             continue
         # 연쇄폭발 시작
         q = deque([(row, col)])
