@@ -9,7 +9,7 @@ def solution(answers):
                 cnt += 1
         temp.append((cnt, i + 1))
     temp.sort(key=lambda x: (-x[0], x[1]))
-    print(temp)
+
     for k in range(len(temp)):
         cnt, idx = temp[k]
         if not answer or temp[k - 1][0] == cnt:
