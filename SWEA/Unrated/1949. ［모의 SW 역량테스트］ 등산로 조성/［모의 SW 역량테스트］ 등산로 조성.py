@@ -5,6 +5,7 @@ def dfs(r, c, m, dis):
         if 0 <= nr < n and 0 <= nc < n and not visited[nr][nc] and matrix[nr][nc] - m < matrix[r][c]:
             temp = matrix[nr][nc]
             visited[nr][nc] = 1
+
             if matrix[nr][nc] >= matrix[r][c]:
                 dig = 1 + matrix[nr][nc] - matrix[r][c]
                 matrix[nr][nc] -= dig
@@ -12,6 +13,7 @@ def dfs(r, c, m, dis):
                 matrix[nr][nc] = temp
             else:
                 dfs(nr, nc, m, dis + 1)
+
             visited[nr][nc] = 0
         else:
             if dis > max_value:
@@ -24,6 +26,7 @@ t = int(input())
 for tc in range(t):
     n, k = map(int, input().split())
     matrix = [list(map(int, input().split())) for _ in range(n)]
+    visited = [[0] * n for _ in range(n)]
     start = 0
     max_value = 0
 
@@ -34,7 +37,7 @@ for tc in range(t):
     for i in range(n):
         for j in range(n):
             if start == matrix[i][j]:
-                visited = [[0] * n for _ in range(n)]
                 visited[i][j] = 1
                 dfs(i, j, k, 0)
+                visited[i][j] = 0
     print(f"#{tc + 1} {max_value + 1}")
