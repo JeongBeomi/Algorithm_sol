@@ -3,10 +3,10 @@ def dfs(r, c, m, dis):
     for i in range(4):
         nr, nc = r + dr[i], c + dc[i]
         if 0 <= nr < n and 0 <= nc < n and not visited[nr][nc] and matrix[nr][nc] - m < matrix[r][c]:
-            temp = matrix[nr][nc]
             visited[nr][nc] = 1
 
             if matrix[nr][nc] >= matrix[r][c]:
+                temp = matrix[nr][nc]
                 dig = 1 + matrix[nr][nc] - matrix[r][c]
                 matrix[nr][nc] -= dig
                 dfs(nr, nc, 0, dis + 1)
