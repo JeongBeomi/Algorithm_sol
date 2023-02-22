@@ -36,6 +36,6 @@ def bfs(s_p, miro, n, m):
                 miro[n_i][n_j] = miro[v_i][v_j] + 1
                 q.append([n_i, n_j])
     else:
-        return [0, -1]
+        return [-1]
 
     return result
