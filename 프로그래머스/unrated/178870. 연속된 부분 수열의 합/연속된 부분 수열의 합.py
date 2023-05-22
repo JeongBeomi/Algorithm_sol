@@ -1,18 +1,19 @@
 def solution(sequence, k):
     answer = []
-    n = len(sequence)
 
-    num_sum = 0
-    idx = 0
-    min_length = n
-
-    for start in range(n):
-        while num_sum < k and idx < n:
-            num_sum += sequence[idx]
-            idx += 1
-        if num_sum == k and idx-1-start < min_length:
-            answer = [start, idx-1]
-            min_length = idx-1-start
-        num_sum -= sequence[start]
+    l = len(sequence)
+    min_length = l
+    now_idx = 0
+    sum_num = 0
+    
+    for start in range(l):
+        while sum_num < k and now_idx < l:
+            sum_num += sequence[now_idx]
+            now_idx += 1
+        if sum_num == k and now_idx - start - 1 < min_length:
+            answer = [start, now_idx - 1]
+            min_length = now_idx - start - 1
+        
+        sum_num -= sequence[start]
 
     return answer
