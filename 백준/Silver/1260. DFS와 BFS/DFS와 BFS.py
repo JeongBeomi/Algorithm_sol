@@ -1,42 +1,40 @@
 from collections import deque
 
-# n=정점개수, m=간선개수, v=탐색시작점
-N, M, V = list(map(int, input().split()))
+def dfs(v):
+    s = deque([v])
+    dfs_visited[v] = True
 
-# 인접영행렬
-matrix = [[0]*(N+1) for i in range(N+1)]
+    while s:
+        v = s.pop()
+        print(v)
+        for next_v in sorted(graph[v]):
+            if not dfs_visited[next_v]:
+                dfs_visited[next_v] = True
+                dfs(next_v)
 
-#방문한곳체크기록할 리스트
-visited_dfs = [0]*(N+1)
-visited_bfs = [0]*(N+1)
 
-# 입력받는 값에 대해 영형렬에 1삽입(인접리스트생성)
-for i in range(M):
-  a,b=map(int,input().split())
-  matrix[a][b]=matrix[b][a]=1
+def bfs(v):
+    q = deque([v])
+    bfs_visited[v] = True
 
-def dfs(V):
-  visited_dfs[V]=1
-  print(V,end=' ')
-  #재귀
-  for i in range(1, N+1):
-    if(visited_dfs[i]==0 and matrix[V][i]==1):
-      dfs(i)
+    while q:
+        v = q.popleft()
+        print(v)
+        for next_v in sorted(graph[v]):
+            if not bfs_visited[next_v]:
+                bfs_visited[next_v] = True
+                q.append(next_v)
 
-def bfs(V):
-  #방문해야할 곳을 순서대로 넣을 큐
-  queue=deque([V])
-  visited_bfs[V]=1
-  
-  #큐안에 데이터없을때까지
-  while queue:
-    V=queue.popleft()
-    print(V, end=' ')
-    for i in range(1, N+1):
-      if(visited_bfs[i]==0 and matrix[V][i]==1):
-        queue.append(i)
-        visited_bfs[i]=1
+n, m, v = map(int, input().split())
+graph = [[] for _ in range(n + 1)]
 
-dfs(V)
-print()
-bfs(V)
+for _ in range(m):
+    v1, v2 = map(int, input().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
+
+dfs_visited = [False] * (n + 1)
+bfs_visited = [False] * (n + 1)
+
+dfs(v)
+bfs(v)
