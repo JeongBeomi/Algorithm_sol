@@ -1,17 +1,19 @@
-from collections import deque
-
+# append하지 않고 index로 풀기 -> append 시간 단축 가능
 n, k = map(int ,input().split())
-q = deque(list(range(1, n + 1)))
-cnt = 1
+q = list(range(1, n + 1))
 result = []
+k -= 1
+idx = k
+
 
 while q:
-    if cnt == k:
-        result.append(q.popleft()) 
-        cnt = 1
+    result.append(q.pop(idx))
+    idx += k
 
-    else:
-        q.append(q.popleft())
-        cnt += 1
+    if len(q) == 0:
+        break
+
+    if idx >= len(q):
+        idx %= len(q)
 
 print("<" + str(result)[1:-1] + ">")
