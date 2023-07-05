@@ -1,8 +1,8 @@
-n = int(input())
+memo = [0, 1]
 
-fibo = [0, 1, 1]
+def fibo(n):
+    if len(memo) <= n:
+        memo.append(fibo(n - 1) + fibo(n -2))
+    return memo[n]
 
-for i in range(3, n + 1):
-    fibo.append(fibo[-1] + fibo[-2])
-
-print(fibo[n])
+print(fibo(int(input())))
