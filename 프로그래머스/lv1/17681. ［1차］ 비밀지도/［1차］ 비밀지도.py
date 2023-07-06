@@ -11,5 +11,6 @@ def solution(n, arr1, arr2):
             else:
                 line = " " + line
         answer.append(line)
+        # 쉬프트연산을 반복하기보다는 정수를 2진수 문자열로 바꾼 후 반복문사용이 더 좋은가?
         
     return answer
