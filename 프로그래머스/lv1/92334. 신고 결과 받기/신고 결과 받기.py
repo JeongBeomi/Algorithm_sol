@@ -3,7 +3,7 @@ def solution(id_list, report, k):
     reported = {}
     
     # key 값의 유저를 신고한 사람을 value 리스트에 추가    
-    for report_string in report:
+    for report_string in set(report):
         user_id, report_id = report_string.split()
         #딕셔너리 내부에 존재하지 않으면 새로 생성
         if reported.get(report_id) == None:
