@@ -8,7 +8,7 @@ def solution(s, n):
         if 97 <= ord(ch) <= 122:
             answer += chr(lower_alpa[(lower_alpa.index(ord(ch)) + n) % len(lower_alpa)])
         # 대문자
-        elif 64 <= ord(ch) <= 90:
+        elif 65 <= ord(ch) <= 90:
             answer += chr(upper_alpa[(upper_alpa.index(ord(ch)) + n) % len(upper_alpa)])
         # 공백
         else:
