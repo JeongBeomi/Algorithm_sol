@@ -29,5 +29,4 @@ def solution(park, routes):
     
     for route in routes:
         s_pos = walking(park, route, s_pos)
-        print(s_pos)
     return s_pos
