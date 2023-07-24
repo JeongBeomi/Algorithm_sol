@@ -1,9 +1,13 @@
 def solution(wallpaper):
     answer = []
-    lux, luy, rdx, rdy = 50, 50, 0, 0
+    x_list, y_list = [], []
     for i in range(len(wallpaper)):
         for j in range(len(wallpaper[0])):
             if wallpaper[i][j] == "#":
-                lux, luy, rdx, rdy = min(i, lux), min(j, luy), max(i, rdx), max(j, rdy)
-    answer = [lux, luy, rdx + 1, rdy + 1]
+                x_list.append(i)
+                y_list.append(j)
+    x_list.sort()
+    y_list.sort()
+    answer = [x_list[0], y_list[0], x_list[-1] + 1, y_list[-1] + 1]
+    
     return answer
