@@ -1,5 +1,4 @@
 def solution(players, callings):
-    answer = []
     ranking_dict = {players[i] : i for i in range(len(players))}
     for calling in callings:
         idx = ranking_dict[calling]
