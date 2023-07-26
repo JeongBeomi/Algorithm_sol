@@ -1,4 +1,3 @@
-from datetime import date
 def solution(today, terms, privacies):
     answer = []
     # 연,월,일 int형으로 각각 저장 후 today를 총 일수로 표현
