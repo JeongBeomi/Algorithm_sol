@@ -9,6 +9,6 @@ def solution(s):
         answer[1] += len(s) - cnt 
         answer[0] += 1
         # 이진 변환 결과를 s에 저장
-        s = str(bin(cnt))[2:]
+        s = bin(cnt)[2:]
         
     return answer
