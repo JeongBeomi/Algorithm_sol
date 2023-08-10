@@ -1,17 +1,21 @@
-# def solution(numbers):
-#     answer = [-1] * len(numbers)
-#     for i in range(len(numbers) - 1):
-#         for j in range(i + 1, len(numbers)):
-#             if numbers[i] < numbers[j]:
-#                 answer[i] = numbers[j]
-#                 break
-#     return answer
 def solution(numbers):
-    answer = [-1] * len(numbers)
-    
-    for i in range(len(numbers)-1, -1, -1):
-        for j in range(i-1, -1, -1):
-            if numbers[j] >= numbers[i]: 
+    answer = []
+    n = len(numbers)
+    s = []
+    for i in range(n - 1, -1, -1):
+        while s:
+            # stack 최근 넣은 숫자가 현재 숫자보다 작거나 같을 경우
+            if numbers[i] >= s[-1]:
+                s.pop()
+            # 현재 숫자보다 stack 숫자가 작을 경우 해당 값이 가장 가까운 큰수이므로 answer에 추가
+            # 다음 숫자 비교를 위해 스택에 현재 numbers 숫자도 추가해준다
+            else:
+                answer.append(s[-1])
+                s.append(numbers[i])
                 break
-            answer[j] = numbers[i]
-    return answer
+        # 스택을 다돌았는데 큰수가 없거나, 스택이 원래 없을 경우
+        else:
+            answer.append(-1)
+            s.append(numbers[i])
+        
+    return answer[::-1]
