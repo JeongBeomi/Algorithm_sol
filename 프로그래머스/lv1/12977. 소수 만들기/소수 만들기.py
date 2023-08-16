@@ -10,7 +10,7 @@ def solution(nums):
         if i in check_set:
             check_set -= set(range(2 * i, max_sum + 1, i))
                              
-    # nums 중 세개 조합 combination 사용하면 더욱간단
+    # nums 중 세개 조합 combination 사용하면 더욱간단 범위는 3개이상 남아야한다
     num_sum = 0
     for j in range(n - 2):
         num_sum += nums[j]
