@@ -10,7 +10,3 @@ def solution(order):
         box += 1
 
     return answer
-
-
-print(solution([4, 3, 1, 2, 5]))
-print(solution([5, 4, 3, 2, 1]))
