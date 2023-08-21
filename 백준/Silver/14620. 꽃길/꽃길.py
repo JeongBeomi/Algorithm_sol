@@ -20,17 +20,17 @@ def checking(r, c):
     return True         
 
 
-def dfs(m, cnt):
+def dfs(r, m, cnt):
     global min_value
 
     if cnt == 3:
         min_value = min(min_value, m)
         return
 
-    for i in range(1, n - 1):
+    for i in range(r, n - 1):
         for j in range(1, n - 1):
             if checking(i, j):
-                dfs(m + planting(i, j), cnt + 1)
+                dfs(i, m + planting(i, j), cnt + 1)
                 # 다음 재귀를 위해 꽃심기전으로 되돌리기
                 planting(i, j)
 
@@ -41,7 +41,7 @@ n = int(input())
 land = [list(map(int, input().split())) for _ in range(n)]
 visited = [[False] * n for _ in range(n)]
 min_value = 3000
-
-dfs(0, 0)
+for i in range(1, n - 1):
+    dfs(i, 0, 0)
         
 print(min_value)
