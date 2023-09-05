@@ -29,11 +29,12 @@ def solution(orders, course):
     for c in course:
         # course 값만큼의 개수를 가지는 조합 만들기
         comb_list =  []
+        # 각 메뉴에서 c개의 원소를 가지는 부분 집합 구하기
         for i in range(len(orders)):
             comb(sorted(orders[i]), c, 0, "", comb_list)
             # in연산을 위해 set 자료형으로 변경
             orders[i] = set(orders[i])
-            
+        # 중복제거    
         comb_list = list(set(comb_list))
         # 인덱스가 주문 횟수 value는 해당 인덱스만큼 주문된 메뉴 목록
         cnt_list = [[] for _ in range(len(orders) + 1)]
