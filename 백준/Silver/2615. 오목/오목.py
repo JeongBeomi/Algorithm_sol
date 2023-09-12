@@ -34,9 +34,13 @@ omok = [list(map(int, input().split())) for _ in range(19)]
 dm = [[(-1, 1), (1, -1)], [(-1, -1), (1, 1)], [(-1, 0), (1, 0)], [(0, -1), (0, 1)]]
 answer = [0]
 for i in range(19):
+    if answer[0] != 0:
+        break
     for j in range(19):
+        if answer[0] != 0:
+            break
         # 돌이 놓여있으면 오목 확인
-        if answer[0] == 0 and omok[i][j] != 0:
+        if omok[i][j] != 0:
             bfs(i, j, omok[i][j])
 
 print(answer[0])
