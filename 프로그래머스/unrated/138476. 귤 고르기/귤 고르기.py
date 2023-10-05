@@ -9,11 +9,8 @@ def solution(k, tangerine):
         else:
             cnt_dict[t] = 1
     
-    # 정렬을 위해 카운트 수 리스트 만들기
-    cnt_list = list()
-    for v in cnt_dict.values():
-        cnt_list.append(v)
-        
+    # 카운트 수 리스트 만들고 정렬
+    cnt_list = list(cnt_dict.values())
     cnt_list.sort(reverse = True)
 
     # 원하는 귤 개수 만큼 뽑기
