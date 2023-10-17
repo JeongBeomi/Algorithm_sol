@@ -24,6 +24,7 @@ def solution(n, wires):
                     q.append(nv)
                     visited[nv] = True
                     
+        # 두 정점의 자식정점수 차이가 적으면 업데이트
         if abs(n - 2 * cnt) < answer:
             answer = abs(n - 2 * cnt)
     
