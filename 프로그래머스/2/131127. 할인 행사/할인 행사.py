@@ -4,17 +4,12 @@ def solution(want, number, discount):
     discount_dict = {k : 0 for k in set(discount)}
     for i in range(10):
         discount_dict[discount[i]] += 1
-    
-    # 애초에 구매할 품목이 할인 목록에 존재하지않으면 불가능
-    for w in want:
-        if w not in discount_dict:
-            return answer
         
     start_d = 1
     while True:
         # 원하는 물건을 다 구매할 수 있는지 확인
         for want_idx in range(len(want)):
-            if number[want_idx] > discount_dict[want[want_idx]]:
+            if want[want_idx] not in discount_dict or number[want_idx] > discount_dict[want[want_idx]]:
                 break
         # 반복문이 정상적으로 다 실행되면 모두 구매 가능하다
         else:
