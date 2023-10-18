@@ -39,9 +39,10 @@ def recur(w):
         if left_cnt == right_cnt:
             v = "".join(w)
             break
-    
+    # 3번 로직
     if check(u):
         return u + recur(v)
+    # 4번 로직
     else:
         temp = "(" + recur(v) + ")"
         for c in u[1 : -1]:
