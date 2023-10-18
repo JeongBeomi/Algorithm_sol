@@ -14,10 +14,13 @@ def solution(files):
                         num_end = j
                         break
                 break
+        # HEAD, NUMBER, TAIL 분리해서 저장
         split_files.append((file[:num_start], file[num_start : num_end], file[num_end :]))
     
+    # 정렬
     split_files.sort(key = lambda x : (x[0].upper(), int(x[1])))    
     
+    # 분리한 문자열 합쳐주기
     for f in split_files:
         answer.append("".join(f))
         
