@@ -28,15 +28,14 @@ def bfs(board, visited):
     while q:
         r, c, t = q.popleft()
         for d in range(4):
-            if not visited[r][c][d]:
-                visited[r][c][d] = 1
-                if 0 <= r + dr[d] < n and 0 <= c + dc[d] < m:
-                    nr, nc = move(board, r, c, d)
-                    if nr == tr and nc == tc:
-                        result = t + 1
-                        return result
-                    else:
-                        q.append((nr, nc, t + 1))
+            nr, nc = move(board, r, c, d)
+            if not visited[nr][nc]:
+                visited[nr][nc] = 1
+                if nr == tr and nc == tc:
+                    result = t + 1
+                    return result
+                else:
+                    q.append((nr, nc, t + 1))
     return result
     
 def solution(board):
@@ -44,6 +43,6 @@ def solution(board):
     for i in range(len(board)):
         board[i] = list(board[i])
     # 각 위치에서 4개의 방향에 대한 방문처리 리스트
-    visited = [[[0] * 4 for _ in range(len(board[0]))] for _ in range(len(board))]
+    visited = [[0] * len(board[0]) for _ in range(len(board))]
     answer = bfs(board, visited)
     return answer
