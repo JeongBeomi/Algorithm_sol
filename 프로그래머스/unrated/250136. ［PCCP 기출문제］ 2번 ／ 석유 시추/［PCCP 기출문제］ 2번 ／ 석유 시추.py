@@ -44,7 +44,7 @@ def solution(land):
                 elif land[r][c] not in visited_set:
                     temp += oil_dict[land[r][c]]
                 
-                # 방문처리
+                # 같은 덩어리의 석유를 여러번 체크할수도잇으니까 방문처리
                 visited_set.add(land[r][c])
         
         answer = max(answer, temp)
