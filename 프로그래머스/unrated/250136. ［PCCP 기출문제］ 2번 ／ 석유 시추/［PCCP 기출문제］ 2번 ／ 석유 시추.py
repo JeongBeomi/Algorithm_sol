@@ -1,52 +1,42 @@
 from collections import deque
 
-def bfs(land, r, c, v):
+def bfs(land, r, c, oil_cnt):
     dr = (0, 0, 1, -1)
     dc = (1, -1, 0, 0)
     n, m = len(land), len(land[0])
+    # 석유량
+    result = 1
+    # bfs시 방문하는 c좌표의땅에서는 해당 석유를 발견할 수 있다  
+    c_set = set([c])
     q = deque([(r, c)])
-    land[r][c] = v
-    cnt = 1
+    # 방문처리대신 해당 땅의 석유값을 0으로 바꿈
+    land[r][c] = 0
     
     while q:
         r, c = q.popleft()
         for i in range(4):
             nr, nc = r + dr[i], c + dc[i]
             if 0 <= nr < n and 0 <= nc < m and land[nr][nc] == 1:
-                land[nr][nc] = v
-                cnt += 1
                 q.append((nr, nc))
+                land[nr][nc] = 0
+                result += 1
+                c_set.add(nc)
     
-    return cnt
+    # bfs를 진행한 석유를 시추할 수 있는 땅 위치에 석유량 추가해주기
+    for col in c_set:
+        oil_cnt[col] += result
     
+
 def solution(land):
     answer = 0
     n, m = len(land), len(land[0])
-    # 이미 찾은 석유의 양 기록을 위한 딕셔너리
-    oil_dict = dict()
+    # 각땅에서 뽑을 수 있는 석유 카운트를 위한 리스트
+    oil_cnt = [0] * m
     
-    # 시추 지점
-    for c in range(m):
-        temp = 0
-        visited_set = set()
-        # 해당 지점에 존재하는 석유 찾기
-        for r in range(n):
-            # 석유 존재 지점
-            if land[r][c] != 0:
-                # 처음 발견 -> bfs
-                if land[r][c] == 1:
-                    # 석유 카운트
-                    oil_cnt = bfs(land, r, c, str(len(oil_dict)))
-                    # 딕셔너리 업데이트 이때 키값은 딕셔너리 길이 -> land에도 방문표시로 딕셔너리 길이 문자값 넣을 예정
-                    oil_dict[str(len(oil_dict))] = oil_cnt
-                    temp += oil_cnt
-                # 찾은적 있으니까 oil_dict에서 값 확인
-                elif land[r][c] not in visited_set:
-                    temp += oil_dict[land[r][c]]
-                
-                # 같은 덩어리의 석유를 여러번 체크할수도잇으니까 방문처리
-                visited_set.add(land[r][c])
-        
-        answer = max(answer, temp)
-                    
-    return answer
+    for i in range(n):
+        for j in range(m):
+            # 석유를 만나면 bfs로 석유 찾기
+            if land[i][j] == 1:
+                bfs(land, i, j, oil_cnt)
+    
+    return max(oil_cnt)
