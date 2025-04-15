@@ -82,10 +82,6 @@ class Solution {
         int answer = r * c;
         storageMap = new int[r][c];
         
-        // for (int[] s : storageMap) {
-        //     System.out.println(Arrays.toString(s));
-        // }
-        
         for (String request : requests) {
             if (request.length() == 1) {
                 answer -= lift(request, storage);
