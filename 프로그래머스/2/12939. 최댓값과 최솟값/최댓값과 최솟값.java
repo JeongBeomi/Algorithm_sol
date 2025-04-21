@@ -1,16 +1,24 @@
+import java.lang.StringBuilder;
+
 class Solution {
     public String solution(String s) {
         String answer = "";
-        String[] stringArray = s.split(" ");
-        int maxNum, minNum;
-        maxNum = minNum = Integer.parseInt(stringArray[0]);
+        String[] nums = s.split(" ");
+        int maxNum = Integer.parseInt(nums[0]);
+        int minNum = Integer.parseInt(nums[0]);
         
-        for (String num : stringArray) {
-            int n = Integer.parseInt(num);
-            if (maxNum < n) maxNum = n;
-            if (minNum > n) minNum = n;
+        for (int i = 1; i < nums.length; i++) {
+            int num = Integer.parseInt(nums[i]);
+            if (maxNum < num) {
+                maxNum = num;
+            } else if (minNum > num) {
+                minNum = num;
+            }
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append(minNum).append(" ").append(maxNum);
         
-        return minNum + " " + maxNum;
+        answer = sb.toString();
+        return answer;
     }
 }
