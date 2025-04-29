@@ -14,9 +14,9 @@ class Solution {
             col = w - (num - 1) % w - 1;
         }
         
-        System.out.printf("%d %d %d %d", higherColCnt, commonHeight, row, col);
-        
         answer = commonHeight - row + 1;
+        
+        // 높이가 1씩 더 높아지는 열일 경우 추가해주기
         if (higherColCnt > 0) {
             if (commonHeight % 2 == 0 && 0 <= col && col < higherColCnt) {
                 answer++;
