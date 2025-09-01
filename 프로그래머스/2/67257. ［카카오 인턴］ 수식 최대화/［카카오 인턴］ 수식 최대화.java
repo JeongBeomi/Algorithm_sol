@@ -1,61 +1,62 @@
-import java.util.ArrayList;
+import java.util.Arrays;
 
 class Solution {
-    static ArrayList<String> perList = new ArrayList<>();
-    static boolean[] perVisited = new boolean[3];
-    static String[] culs = {"+", "-", "*"}; 
+    static String[] operator = {"+", "-", "*"};
+    static String[] operatorPrecedence = new String[3];
+    static boolean[] visited = new boolean[3];
+    static long maxNum = 0;
     
-    public void permutation(int dept, String culPer) {
+    public void operatorPermutaion(int dept, String e) {
         if (dept >= 3) {
-            perList.add(culPer);
+            System.out.println(Arrays.toString(operatorPrecedence));
+            maxNum = Math.max(maxNum, Math.abs(recur(0, e)));
             return;
         }
         
         for (int i = 0; i < 3; i++) {
-            if (!perVisited[i]) {
-                perVisited[i] = true;
-                permutation(dept + 1, culPer + culs[i]);
-                perVisited[i] = false;
-            } 
+            if (!visited[i]) {
+                visited[i] = true;
+                operatorPrecedence[dept] = operator[i];
+                operatorPermutaion(dept + 1, e);
+                visited[i] = false;
+            }
         }
         
     }
     
-    public long recul(int dept, String e, String per) {
+    public long recur(int dept, String e) {
         if (dept >= 3) {
             return Long.parseLong(e);
         }
         
-        String[] eSplitList = e.split("\\"+String.valueOf(per.charAt(dept)));
-        long result = recul(dept + 1, eSplitList[0], per);
+        String[] expressionSplitList = e.split("\\" + operatorPrecedence[dept]);
+        long sumNum = recur(dept + 1, expressionSplitList[0]);
+        for (int i = 1; i < expressionSplitList.length; i++) {
+            sumNum = calculate(sumNum, recur(dept + 1, expressionSplitList[i]), operatorPrecedence[dept]);
+        }
+        return sumNum;
         
-        for (int i = 1; i < eSplitList.length; i++) {
-            result = calculater(per.charAt(dept), result, recul(dept + 1, eSplitList[i], per));
+    }
+    
+    public long calculate(long num1, long num2, String o) {
+        long result = 0;
+        if (o.equals("+")) {
+            result = num1 + num2;
+        } else if (o.equals("-")) {
+            result = num1 - num2;
+        } else if (o.equals("*")) {
+            result = num1 * num2;
         }
         
         return result;
     }
     
-    public long calculater(char c, long num1, long num2) {
-        if (c == '+') {
-            return num1 + num2;
-        } else if (c == '-') {
-            return num1 - num2;
-        } else {
-            return num1 * num2;
-        }
-    }
     
     public long solution(String expression) {
         long answer = 0;
-        String culPer = "";
         
-        permutation(0, culPer);
-        
-        for (String p : perList) {
-            long total = Math.abs(recul(0, expression, p));
-            if (answer < total) answer = total; 
-        }
+        operatorPermutaion(0, expression);
+        answer = maxNum;
         
         return answer;
     }
