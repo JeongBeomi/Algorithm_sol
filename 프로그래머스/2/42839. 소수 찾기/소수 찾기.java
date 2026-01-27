@@ -1,44 +1,45 @@
-import java.util.Set;
 import java.util.HashSet;
-import java.lang.StringBuilder;
+import java.util.Set;
+import java.util.Arrays;
 
-class Solution {
-    static String[] numberArray;
-    static Set<Integer> numberSet = new HashSet<>();
-    static boolean[] visited;
-    
-    public void permutations(int target, int nowIdx, StringBuilder num) {
-        if (target <= nowIdx) {
-            int number = Integer.parseInt(num.toString());
-            if (number > 1) numberSet.add(number);
-        } else {
-            for (int i = 0; i < numberArray.length; i++) {
-                if (!visited[i]) {
-                    visited[i] = true;
-                    num.append(numberArray[i]);
-                    permutations(target, nowIdx + 1, num);
-                    num.deleteCharAt(nowIdx);
-                    visited[i] = false;
-                }
-            }
+class Solution {    
+    public void permutation(Set<Integer> numSet, String[] numberArray, boolean[] visited, int target, int dept, StringBuilder sb) {
+        if (target == dept) {
+            numSet.add(Integer.parseInt(sb.toString()));
+            return;
         }
         
+        for (int idx = 0; idx < numberArray.length; idx++) {
+            if (!visited[idx]) {
+                sb.append(numberArray[idx]);
+                visited[idx] = true;
+                permutation(numSet, numberArray, visited, target, dept + 1, sb);
+                sb.deleteCharAt(dept);
+                visited[idx] = false;
+            }
+        }
     }
     
     public int solution(String numbers) {
         int answer = 0;
-        numberArray = numbers.split("");
+        
+        Set<Integer> numSet = new HashSet<Integer>();   // 중복 숫자 제외를 위해 Set 자료형 사용
         StringBuilder sb;
-        for (int i = 1; i < numberArray.length + 1; i++) {
-            visited = new boolean[numberArray.length];
+        boolean[] visited;
+        // numbers에서 i 개를 뽑았을 때 만들수 있는 숫자 순열 만들기
+        for (int i = 1; i <= numbers.length(); i++) {
             sb = new StringBuilder();
-            permutations(i, 0, sb);    
+            visited = new boolean[numbers.length()];
+            permutation(numSet, numbers.split(""), visited, i, 0, sb);
         }
         
-        for (int number : numberSet) {
+        // 만든 숫자 순열을 순회하며 소수가 몇개 인지 확인
+        System.out.println(numSet);
+        for (int num : numSet) {
+            if (num < 2) continue;
             answer++;
-            for (int i = 2; i * i <= number; i++) {
-                if (number % i == 0) {
+            for (int n = 2; n * n <= num; n++) {
+                if (num % n == 0) {
                     answer--;
                     break;
                 }
